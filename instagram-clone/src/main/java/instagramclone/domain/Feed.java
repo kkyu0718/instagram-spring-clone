@@ -9,7 +9,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Getter
 @ToString
 @Table(indexes = {
-        @Index(columnList = "email"),
+        @Index(columnList = "content"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
 })
