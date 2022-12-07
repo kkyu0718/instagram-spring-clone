@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class InstagramCloneApplication {
 
 	public static void main(String[] args) {
-		System.out.println("HelloWorld!");
 		SpringApplication.run(InstagramCloneApplication.class, args);
 	}
 
