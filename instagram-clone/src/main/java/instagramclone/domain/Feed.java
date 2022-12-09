@@ -17,20 +17,25 @@ import java.util.Set;
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
 })
-@EntityListeners(AuditingEntityListener.class)
 @Entity
-public class Feed {
+public class Feed extends AuditingField {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Setter @Column(nullable = false) private String content;
 
+    @ToString.Exclude
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "feed")
     private Set<Image> images = new HashSet<>();
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "user")
     private Set<Like> likes = new HashSet<>();
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "user")
+    private Set<Tag> tags = new HashSet<>();
 
     protected Feed() {}
 
