@@ -12,7 +12,7 @@ import java.util.Set;
 
 @Getter
 @ToString
-@Table(indexes = {
+@Table(name = "Feed", indexes = {
         @Index(columnList = "content"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
@@ -28,6 +28,9 @@ public class Feed {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "feed")
     private Set<Image> images = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Like> likes = new HashSet<>();
 
     protected Feed() {}
 

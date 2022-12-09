@@ -11,11 +11,13 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @ToString
-@Table(indexes = {
+@Table(name = "User", indexes = {
         @Index(columnList = "email"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
@@ -30,10 +32,8 @@ public class User {
     @Setter @Column(nullable = false, length = 200) private String password;
     @Setter @Column(nullable = false, length = 30) private String name;
 
-    @CreatedDate @Column(nullable = false) private LocalDateTime createdAt;
-    @CreatedBy @Column(nullable = false, length = 30) private String createdBy;
-    @LastModifiedDate @Column(nullable = false) private LocalDateTime modifiedAt;
-    @LastModifiedBy @Column(nullable = false, length = 30) private String modifiedBy;
+    @OneToMany(mappedBy = "feed")
+    private Set<Like> likes = new HashSet<>();
 
     protected User() {
     }
