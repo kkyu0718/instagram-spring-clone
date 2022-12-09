@@ -7,7 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.util.Objects;
 import java.util.Set;
 
-@Table(indexes = {
+@Table(name = "Image", indexes = {
         @Index(columnList = "feed")
 })
 @EntityListeners(AuditingEntityListener.class)

@@ -12,7 +12,7 @@ import java.util.Set;
 
 @Getter
 @ToString
-@Table(indexes = {
+@Table(name = "Feed", indexes = {
         @Index(columnList = "content"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")

@@ -7,7 +7,10 @@ import lombok.ToString;
 
 @Getter
 @ToString
-@Table
+@Table(name = "Like", indexes = {
+        @Index(columnList = "feed"),
+        @Index(columnList = "user")
+})
 @EntityListeners(AuditingField.class)
 @Entity
 public class Like {

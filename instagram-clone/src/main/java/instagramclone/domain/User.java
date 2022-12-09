@@ -17,7 +17,7 @@ import java.util.Set;
 
 @Getter
 @ToString
-@Table(indexes = {
+@Table(name = "User", indexes = {
         @Index(columnList = "email"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
