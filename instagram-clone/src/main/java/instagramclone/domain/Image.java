@@ -2,6 +2,7 @@ package instagramclone.domain;
 
 import jakarta.persistence.*;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Objects;
 
@@ -16,6 +17,7 @@ public class Image extends AuditingField{
 
     @Setter @Column(nullable = false) private String imageUrl;
 
+    @ToString.Exclude
     @ManyToOne()
     private Feed feed;
 

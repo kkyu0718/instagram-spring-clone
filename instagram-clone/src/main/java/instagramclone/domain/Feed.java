@@ -25,7 +25,6 @@ public class Feed extends AuditingField {
 
     @Setter @Column(nullable = false) private String content;
 
-    @ToString.Exclude
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "feed")
     private Set<Image> images = new HashSet<>();
 
@@ -36,6 +35,10 @@ public class Feed extends AuditingField {
     @ToString.Exclude
     @OneToMany(mappedBy = "user")
     private Set<Tag> tags = new HashSet<>();
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "user")
+    private Set<Comment> comments = new HashSet<>();
 
     protected Feed() {}
 

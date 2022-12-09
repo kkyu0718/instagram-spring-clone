@@ -34,6 +34,11 @@ public class User {
     @ToString.Exclude
     @OneToMany(mappedBy = "feed")
     private Set<Tag> tags = new HashSet<>();
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "feed")
+    private Set<Comment> comments = new HashSet<>();
+
     protected User() {
     }
 
