@@ -29,6 +29,9 @@ public class Feed {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "feed")
     private Set<Image> images = new HashSet<>();
 
+    @OneToMany(mappedBy = "user")
+    private Set<Like> likes = new HashSet<>();
+
     protected Feed() {}
 
     private Feed(String content) {
