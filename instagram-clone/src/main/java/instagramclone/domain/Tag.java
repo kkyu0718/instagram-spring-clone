@@ -1,19 +1,17 @@
 package instagramclone.domain;
 
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
 @ToString
-@Table(name = "Like", indexes = {
+@Table(name = "Tag", indexes = {
         @Index(columnList = "feed"),
         @Index(columnList = "user")
 })
 @Entity
-public class Like extends AuditingField {
-
+public class Tag extends AuditingField {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

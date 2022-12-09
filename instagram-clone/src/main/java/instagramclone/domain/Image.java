@@ -2,17 +2,14 @@ package instagramclone.domain;
 
 import jakarta.persistence.*;
 import lombok.Setter;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Objects;
-import java.util.Set;
 
 @Table(name = "Image", indexes = {
         @Index(columnList = "feed")
 })
-@EntityListeners(AuditingEntityListener.class)
 @Entity
-public class Image {
+public class Image extends AuditingField{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

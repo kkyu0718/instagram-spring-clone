@@ -4,13 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -32,9 +27,13 @@ public class User {
     @Setter @Column(nullable = false, length = 200) private String password;
     @Setter @Column(nullable = false, length = 30) private String name;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "feed")
     private Set<Like> likes = new HashSet<>();
 
+    @ToString.Exclude
+    @OneToMany(mappedBy = "feed")
+    private Set<Tag> tags = new HashSet<>();
     protected User() {
     }
 
