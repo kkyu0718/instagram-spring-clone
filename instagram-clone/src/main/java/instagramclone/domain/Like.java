@@ -9,10 +9,7 @@ import java.util.Objects;
 
 @Getter
 @ToString
-@Table(name = "Like", indexes = {
-        @Index(columnList = "feed"),
-        @Index(columnList = "user")
-})
+@Table(name = "Likes")
 @Entity
 public class Like extends AuditingField {
 
@@ -26,17 +23,17 @@ public class Like extends AuditingField {
 
     @ManyToOne
     @JoinColumn(name = "userId")
-    private User user;
+    private UserAccount userAccount;
 
     protected Like() {};
 
-    private Like(Feed feed, User user) {
+    private Like(Feed feed, UserAccount userAccount) {
         this.feed = feed;
-        this.user = user;
+        this.userAccount = userAccount;
     }
 
-    public static Like of(Feed feed, User user) {
-        return new Like(feed, user);
+    public static Like of(Feed feed, UserAccount userAccount) {
+        return new Like(feed, userAccount);
     }
 
     @Override

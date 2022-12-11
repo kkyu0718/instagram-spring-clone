@@ -5,6 +5,9 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+## db 관련 정보 저장 파일
+application-env.yml
+
 ### STS ###
 .apt_generated
 .classpath

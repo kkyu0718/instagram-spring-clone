@@ -11,15 +11,19 @@ import java.util.Set;
 
 @Getter
 @ToString
-@Table(name = "Comment", indexes = {
-        @Index(columnList = "feed"),
-        @Index(columnList = "user")
-})
+@Table(name = "Comment")
 @Entity
-public class Comment {
+public class Comment extends AuditingField {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Setter
+    @Column(updatable = false)
+    private Long parentCommentId; // 부모 댓글 ID
+
+    @Setter @Column(nullable = false, length = 500)
+    private String content;
 
     @ManyToOne
     @JoinColumn(name = "feedId")
@@ -27,31 +31,24 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "userId")
-    private User user;
-
-    @Setter
-    @Column(updatable = false)
-    private Long parentCommentId; // 부모 댓글 ID
+    private UserAccount userAccount;
 
     @ToString.Exclude
     @OrderBy("createdAt ASC")
     @OneToMany(mappedBy = "parentCommentId", cascade = CascadeType.ALL)
     private Set<Comment> childComments = new LinkedHashSet<>();
 
-    @Setter @Column(nullable = false, length = 500)
-    private String content;
-
     protected Comment() {}
 
-    private Comment(Feed feed, User user, Long parentCommentId, String content) {
+    private Comment(Feed feed, UserAccount userAccount, Long parentCommentId, String content) {
         this.feed = feed;
-        this.user = user;
+        this.userAccount = userAccount;
         this.parentCommentId = parentCommentId;
         this.content = content;
     }
 
-    public static Comment of(Feed feed, User user, Long parentCommentId, String content) {
-        return new Comment(feed, user, null, content);
+    public static Comment of(Feed feed, UserAccount userAccount, Long parentCommentId, String content) {
+        return new Comment(feed, userAccount, null, content);
     }
 
     public void addChildComment(Comment child) {

@@ -25,19 +25,15 @@ public class Feed extends AuditingField {
 
     @Setter @Column(nullable = false) private String content;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "feed")
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Image> images = new HashSet<>();
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Like> likes = new HashSet<>();
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "user")
-    private Set<Tag> tags = new HashSet<>();
-
-    @ToString.Exclude
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Comment> comments = new HashSet<>();
 
     protected Feed() {}
