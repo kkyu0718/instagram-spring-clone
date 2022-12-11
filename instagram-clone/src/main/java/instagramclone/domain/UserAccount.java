@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -12,14 +11,13 @@ import java.util.Set;
 
 @Getter
 @ToString
-@Table(name = "User", indexes = {
+@Table(name = "UserAccount", indexes = {
         @Index(columnList = "email"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
 })
-@EntityListeners(AuditingEntityListener.class)
 @Entity
-public class User {
+public class UserAccount extends AuditingField {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,36 +26,32 @@ public class User {
     @Setter @Column(nullable = false, length = 30) private String name;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "feed")
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Like> likes = new HashSet<>();
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "feed")
-    private Set<Tag> tags = new HashSet<>();
-
-    @ToString.Exclude
-    @OneToMany(mappedBy = "feed")
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Comment> comments = new HashSet<>();
 
-    protected User() {
+    protected UserAccount() {
     }
 
-    private User(String email, String password, String name) {
+    private UserAccount(String email, String password, String name) {
         this.email = email;
         this.password = password;
         this.name = name;
     }
 
-    public static User of(String email, String password, String name) {
-        return new User(email, password, name);
+    public static UserAccount of(String email, String password, String name) {
+        return new UserAccount(email, password, name);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id != null && id == user.id;
+        UserAccount userAccount = (UserAccount) o;
+        return id != null && id == userAccount.id;
     }
 
     @Override

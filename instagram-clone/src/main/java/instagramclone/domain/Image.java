@@ -6,9 +6,7 @@ import lombok.ToString;
 
 import java.util.Objects;
 
-@Table(name = "Image", indexes = {
-        @Index(columnList = "feed")
-})
+@Table(name = "Image")
 @Entity
 public class Image extends AuditingField{
     @Id
