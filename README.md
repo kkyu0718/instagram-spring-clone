@@ -8,8 +8,6 @@
 |------|---|---|-----|
 |회원 가입|user|POST|/user|
 |로그인|user|POST|/user/login|
-|회원 조회|user|GET|/user/{id}|
-|회원 검색|user|GET|/user?email=|
 |게시글 업로드|feed|POST|/feed|
 |게시글 조회|feed|GET|/feed/{id}|
 |채팅|chat|?|?|
