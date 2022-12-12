@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Service
 public class AuthService {
-    @Autowired
     private final UserRepository userRepository;
 
     @Transactional

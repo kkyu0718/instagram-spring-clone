@@ -30,7 +30,7 @@ class AuthServiceTest {
     void 회원가입_성공() {
         //given
         UserAccount userAccount = UserAccount.of("kyuwon", "email@domain.com", "password");
-        UserAccount savedUserAccount = UserAccount.of("kyuwon", "email@domain.com", "password", "kyuwon");
+        UserAccount savedUserAccount = UserAccount.of(1L, "kyuwon", "email@domain.com", "password", "kyuwon");
 //        given(mockedUserRepository.save(any())).willReturn(savedUserAccount); // any 로 고치니 해결 완료 -> 추후 해결 필요
         given(userRepository.save(userAccount)).willReturn(savedUserAccount);
 
@@ -39,10 +39,11 @@ class AuthServiceTest {
 
         //then
         assertThat(result)
-//                .hasFieldOrProperty("id")
+                .hasFieldOrPropertyWithValue("id", 1L)
                 .hasFieldOrPropertyWithValue("email", userAccount.getEmail())
-                .hasFieldOrProperty("password")
+                .hasFieldOrProperty("password") // 암호화를 할 것이기 때문에 value 검사는 제외
                 .hasFieldOrPropertyWithValue("name", userAccount.getName());
+        
         then(userRepository).should().save(userAccount);
     }
 }
