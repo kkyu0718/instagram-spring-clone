@@ -12,21 +12,26 @@ import java.util.stream.Collectors;
 
 
 public record UserAccountDto(
+                            Long id,
                              String name,
                              String email,
                              String password,
-                             Set<Like> likes,
-                             Set<Comment> comments,
+                             Set<LikeDto> likesDto,
+                             Set<CommentDto> commentsDto,
                              LocalDateTime createdAt,
                              String createdBy,
                              LocalDateTime modifiedAt,
                              String modifiedBy)  {
-    public static UserAccountDto of(String email, String password, String name){
-        return new UserAccountDto(email, password, name, null, null, null, null, null, null);
+    public static UserAccountDto of(Long id, String email, String password, String name){
+        return new UserAccountDto(id, email, password, name, null, null, null, null, null, null);
     }
 
+    public static UserAccountDto of(String email, String password, String name){
+        return new UserAccountDto(null, email, password, name, null, null, null, null, null, null);
+    }
     public static UserAccountDto from(UserAccount entity) {
         return new UserAccountDto(
+                entity.getId(),
                 entity.getName(),
                 entity.getEmail(),
                 entity.getPassword(),
@@ -35,6 +40,9 @@ public record UserAccountDto(
 //                        .map(LikesDto::from)
 //                        .collect(Collectors.toUnmodifiableSet()),
                 entity.getComments(),
+//                        .stream()
+//                        .map(CommentDto::from)
+//                        .collect(Collectors.toUnmodifiableSet()),
                 entity.getCreatedAt(),
                 entity.getCreatedBy(),
                 entity.getModifiedAt(),
