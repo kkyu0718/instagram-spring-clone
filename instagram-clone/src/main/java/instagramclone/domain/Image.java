@@ -1,9 +1,9 @@
 package instagramclone.domain;
 
-import jakarta.persistence.*;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 @Table(name = "Image")

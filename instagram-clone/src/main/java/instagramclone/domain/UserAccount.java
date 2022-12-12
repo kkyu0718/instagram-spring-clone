@@ -1,17 +1,17 @@
 package instagramclone.domain;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Getter
 @ToString
-@Table(name = "UserAccount", indexes = {
+@Table(name = "user_account", indexes = {
         @Index(columnList = "email"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
@@ -36,22 +36,42 @@ public class UserAccount extends AuditingField {
     protected UserAccount() {
     }
 
-    private UserAccount(String email, String password, String name) {
+    private UserAccount(String name, String email, String password, String createdBy) {
+        this.name = name;
         this.email = email;
         this.password = password;
+        this.createdBy = createdBy;
+        this.modifiedBy = createdBy;
+    }
+
+    private UserAccount(Long id, String name, String email, String password, String createdBy) {
+        this.id = id;
         this.name = name;
+        this.email = email;
+        this.password = password;
+        this.createdBy = createdBy;
+        this.modifiedBy = createdBy;
     }
 
-    public static UserAccount of(String email, String password, String name) {
-        return new UserAccount(email, password, name);
+    public static UserAccount of(String name, String email, String password) {
+        return new UserAccount(name, email, password,null);
     }
 
+    public static UserAccount of(String name, String email, String password, String createdBy) {
+        return new UserAccount(name, email, password, createdBy);
+    }
+
+    public static UserAccount of(Long id, String name, String email, String password, String createdBy) {
+        return new UserAccount(id, name, email, password, createdBy);
+    }
+
+    // 원래대로라면 id만을 비교하겠지만 service test code 상의 문제 이슈로 id가 아닌 unique key인 이메일을 비교합니다.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserAccount userAccount = (UserAccount) o;
-        return id != null && id == userAccount.id;
+        UserAccount that = (UserAccount) o;
+        return email.equals(that.email);
     }
 
     @Override
