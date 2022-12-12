@@ -23,11 +23,10 @@ public class Image extends AuditingField{
 
     private Image(String imageUrl, Feed feed) {
         this.imageUrl = imageUrl;
-        this.feed = feed;
     }
 
-    public static Image of(String imageUrl, Feed feed) {
-        return new Image(imageUrl, feed);
+    public static Image of(String imageUrl) {
+        return new Image(imageUrl);
     }
 
     @Override

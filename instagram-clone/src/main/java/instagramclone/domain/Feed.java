@@ -37,12 +37,23 @@ public class Feed extends AuditingField {
 
     protected Feed() {}
 
-    private Feed(String content) {
+    private Feed(String content, Set<Image> images) {
         this.content = content;
+        this.images = images;
     }
 
-    public static Feed of(String content) {
-        return new Feed(content);
+    private Feed(Long id, String content, Set<Image> images) {
+        this.id = id;
+        this.content = content;
+        this.images = images;
+    }
+
+    public static Feed of(String content, Set<Image> images) {
+        return new Feed(content, images);
+    }
+
+    public static Feed of(Long id, String content, Set<Image> images) {
+        return new Feed(id, content, images);
     }
 
     @Override
