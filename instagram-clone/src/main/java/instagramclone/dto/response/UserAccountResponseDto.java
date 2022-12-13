@@ -1,11 +1,10 @@
 package instagramclone.dto.response;
 
-import instagramclone.domain.UserAccount;
 import instagramclone.dto.UserAccountDto;
 
 import java.time.LocalDateTime;
 
-public record SignInResponse(
+public record UserAccountResponseDto(
         Long id,
         String name,
         String email,
@@ -15,8 +14,8 @@ public record SignInResponse(
         LocalDateTime modifiedAt,
         String modifiedBy) {
 
-    public static SignInResponse from(UserAccountDto dto) {
-        return new SignInResponse(
+    public static UserAccountResponseDto from(UserAccountDto dto) {
+        return new UserAccountResponseDto(
                 dto.id(),
                 dto.name(),
                 dto.email(),
