@@ -16,18 +16,16 @@ public record UserAccountDto(
                              String name,
                              String email,
                              String password,
-                             Set<LikeDto> likesDto,
-                             Set<CommentDto> commentsDto,
                              LocalDateTime createdAt,
                              String createdBy,
                              LocalDateTime modifiedAt,
                              String modifiedBy)  {
     public static UserAccountDto of(Long id, String email, String password, String name){
-        return new UserAccountDto(id, email, password, name, null, null, null, null, null, null);
+        return new UserAccountDto(id, email, password, name, null, null, null, null);
     }
 
     public static UserAccountDto of(String email, String password, String name){
-        return new UserAccountDto(null, email, password, name, null, null, null, null, null, null);
+        return new UserAccountDto(null, email, password, name, null, null, null, null);
     }
     public static UserAccountDto from(UserAccount entity) {
         return new UserAccountDto(
@@ -35,14 +33,6 @@ public record UserAccountDto(
                 entity.getName(),
                 entity.getEmail(),
                 entity.getPassword(),
-                entity.getLikes(),
-//                        .stream()
-//                        .map(LikesDto::from)
-//                        .collect(Collectors.toUnmodifiableSet()),
-                entity.getComments(),
-//                        .stream()
-//                        .map(CommentDto::from)
-//                        .collect(Collectors.toUnmodifiableSet()),
                 entity.getCreatedAt(),
                 entity.getCreatedBy(),
                 entity.getModifiedAt(),
