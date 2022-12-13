@@ -10,5 +10,9 @@
 |로그인|user|POST|/user/login|
 |게시글 업로드|feed|POST|/feed|
 |게시글 조회|feed|GET|/feed/{id}|
+|댓글 등록|comment|POST|/comment|
+|댓글 조회|comment|GET|/comment/{id}|
+|좋아요 등록|like|POST|/like|
+|좋아요 취소|like|DELETE|/like|
 |채팅|chat|?|?|
 
