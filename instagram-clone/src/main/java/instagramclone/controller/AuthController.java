@@ -1,8 +1,8 @@
 package instagramclone.controller;
 
 import instagramclone.dto.UserAccountDto;
-import instagramclone.dto.request.SignInRequest;
-import instagramclone.dto.response.SignInResponse;
+import instagramclone.dto.request.SignInRequestDto;
+import instagramclone.dto.response.UserAccountResponseDto;
 import instagramclone.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +22,8 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/signup")
-    public ResponseEntity<SignInResponse> signIn (@RequestBody SignInRequest request) {
+    public ResponseEntity<UserAccountResponseDto> signIn (@RequestBody SignInRequestDto request) {
         UserAccountDto user = authService.saveUser(request.name(), request.email(), request.password());
-        return ResponseEntity.status(HttpStatus.CREATED).body(SignInResponse.from(user));
+        return ResponseEntity.status(HttpStatus.CREATED).body(UserAccountResponseDto.from(user));
     }
 }
