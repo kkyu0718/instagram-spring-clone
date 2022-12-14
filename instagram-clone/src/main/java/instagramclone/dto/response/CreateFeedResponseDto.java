@@ -5,25 +5,27 @@ import instagramclone.dto.FeedDto;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public record CreateFeedResponseDto(
         Long id,
         String content,
-        Set<Image> images,
+        Set<String> imageUrls,
         LocalDateTime createdAt,
         String createdBy
 ) {
-    public static CreateFeedResponseDto of (Long id, String content, Set<Image> images) {
-        return new CreateFeedResponseDto(id, content, images, null, null);
+    public static CreateFeedResponseDto of (Long id, String content, Set<String> imageUrls) {
+        return new CreateFeedResponseDto(id, content, imageUrls, null, null);
     }
 
     public static CreateFeedResponseDto from(FeedDto dto) {
         return new CreateFeedResponseDto(
                 dto.id(),
                 dto.content(),
-                dto.imagesDto()
+                dto.images()
                         .stream()
-                        .map(Image::imageUrl),
+                        .map(Image::getImageUrl)
+                        .collect(Collectors.toUnmodifiableSet()),
                 dto.createdAt(),
                 dto.createdBy()
         );

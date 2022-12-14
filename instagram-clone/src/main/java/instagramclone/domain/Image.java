@@ -1,11 +1,14 @@
 package instagramclone.domain;
 
+import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Objects;
 
+@Getter
+@ToString
 @Table(name = "Image")
 @Entity
 public class Image extends AuditingField{
@@ -21,7 +24,7 @@ public class Image extends AuditingField{
 
     protected Image() {}
 
-    private Image(String imageUrl, Feed feed) {
+    private Image(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 

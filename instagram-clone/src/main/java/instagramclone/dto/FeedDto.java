@@ -4,6 +4,7 @@ import instagramclone.domain.Feed;
 import instagramclone.domain.Image;
 import instagramclone.domain.Like;
 import instagramclone.dto.request.LikeRequestDto;
+import org.hibernate.criterion.LikeExpression;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -13,7 +14,7 @@ public record FeedDto (
         Long id,
         String content,
         Set<Image> images,
-        Set<LikeRequestDto> likesDto,
+        Set<LikeDto> likesDto,
         Set<CommentDto> commentsDto,
         LocalDateTime createdAt,
         String createdBy,
@@ -32,7 +33,7 @@ public record FeedDto (
                 entity.getImages(),
                 entity.getLikes()
                         .stream()
-                        .map(Like::from)
+                        .map(LikeDto::from)
                         .collect(Collectors.toUnmodifiableSet()),
                 entity.getComments()
                         .stream()

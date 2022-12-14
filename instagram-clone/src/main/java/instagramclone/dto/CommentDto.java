@@ -18,11 +18,11 @@ public record CommentDto(
 )
 {
     public static CommentDto of(Long parentCommentId, String content, Long feedId, UserAccountDto userAccountDto) {
-        return new CommentDto(null, parentCommentId, content, feedId, userAccountDto, null, null, null, null)
+        return new CommentDto(null, parentCommentId, content, feedId, userAccountDto, null, null, null, null);
     }
 
     public static CommentDto of(String content, Long feedId, UserAccountDto userAccountDto) {
-        return new CommentDto(null, null, content, feedId, userAccountDto, null, null, null, null)
+        return new CommentDto(null, null, content, feedId, userAccountDto, null, null, null, null);
     }
 
     public static CommentDto from (Comment entity) {
