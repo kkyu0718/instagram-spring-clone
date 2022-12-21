@@ -1,6 +1,7 @@
 package instagramclone.controller;
 
 import instagramclone.dto.UserAccountDto;
+import instagramclone.dto.request.LoginRequestDto;
 import instagramclone.dto.request.SignInRequestDto;
 import instagramclone.dto.response.UserAccountResponseDto;
 import instagramclone.service.AuthService;
@@ -25,5 +26,11 @@ public class AuthController {
     public ResponseEntity<UserAccountResponseDto> signIn (@RequestBody SignInRequestDto request) {
         UserAccountDto user = authService.saveUser(request.name(), request.email(), request.password());
         return ResponseEntity.status(HttpStatus.CREATED).body(UserAccountResponseDto.from(user));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserAccountResponseDto> login (@RequestBody LoginRequestDto request) {
+        UserAccountDto user = authService.loginUser(request.email(), request.password());
+        return ResponseEntity.status(HttpStatus.OK).body(UserAccountResponseDto.from(user));
     }
 }
