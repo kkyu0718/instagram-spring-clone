@@ -7,19 +7,19 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public record CreateFeedResponseDto(
+public record FeedResponseDto(
         Long id,
         String content,
         Set<String> imageUrls,
         LocalDateTime createdAt,
         String createdBy
 ) {
-    public static CreateFeedResponseDto of (Long id, String content, Set<String> imageUrls) {
-        return new CreateFeedResponseDto(id, content, imageUrls, null, null);
+    public static FeedResponseDto of (Long id, String content, Set<String> imageUrls) {
+        return new FeedResponseDto(id, content, imageUrls, null, null);
     }
 
-    public static CreateFeedResponseDto from(FeedDto dto) {
-        return new CreateFeedResponseDto(
+    public static FeedResponseDto from(FeedDto dto) {
+        return new FeedResponseDto(
                 dto.id(),
                 dto.content(),
                 dto.images()

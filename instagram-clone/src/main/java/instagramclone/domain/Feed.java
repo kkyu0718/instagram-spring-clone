@@ -24,18 +24,24 @@ public class Feed extends AuditingField {
 
     @Setter @Column(nullable = false) private String content;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Image> images = new HashSet<>();
 
+    @Setter
     @ToString.Exclude
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "feed",cascade = CascadeType.ALL)
     private Set<Like> likes = new HashSet<>();
 
+    @Setter
     @ToString.Exclude
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL)
     private Set<Comment> comments = new HashSet<>();
 
     protected Feed() {}
+
+    private Feed(String content) {
+        this.content = content;
+    }
 
     private Feed(String content, Set<Image> images) {
         this.content = content;
@@ -46,6 +52,10 @@ public class Feed extends AuditingField {
         this.id = id;
         this.content = content;
         this.images = images;
+    }
+
+    public static Feed of(String content) {
+        return new Feed(content);
     }
 
     public static Feed of(String content, Set<Image> images) {

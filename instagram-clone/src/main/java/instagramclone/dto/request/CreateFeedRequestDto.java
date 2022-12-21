@@ -6,10 +6,10 @@ import java.util.Set;
 
 public record CreateFeedRequestDto(
                     String content,
-                    Set<Image> images
+                    Set<String> images
                     ) {
 
-    public static CreateFeedRequestDto of (String content, Set<Image> images) {
+    public static CreateFeedRequestDto of (String content, Set<String> images) {
         return new CreateFeedRequestDto(content, images);
     }
 }
