@@ -14,8 +14,11 @@ public enum ErrorCode {
 
     // user
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 유저입니다."),
-    DUPLICATED_EMAIL(HttpStatus.CONFLICT, "중복된 이메일 입니다.")
-    ;
+    DUPLICATED_EMAIL(HttpStatus.CONFLICT, "중복된 이메일 입니다."),
+
+    // feed
+    FEED_NOT_CREATED(HttpStatus.BAD_REQUEST, "피드 저장에 실패하였습니다."),
+    FEED_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 피드입니다.");
 
     private final HttpStatus status;
     private final String message;

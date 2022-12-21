@@ -16,10 +16,11 @@ public class Image extends AuditingField{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter @Column(nullable = false) private String imageUrl;
+    @Column(nullable = false) private String imageUrl;
 
     @ToString.Exclude
     @ManyToOne()
+    @JoinColumn(name = "feed_id")
     private Feed feed;
 
     protected Image() {}
