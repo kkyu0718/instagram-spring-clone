@@ -6,7 +6,7 @@
 ### **API 명세서**
 |기능|분류|메소드|path|
 |------|---|---|-----|
-|회원 가입|user|POST|/auth/signin|
+|회원 가입|user|POST|/auth/signup|
 |로그인|user|POST|/auth/login|
 |게시글 업로드|feed|POST|/feed|
 |게시글 조회|feed|GET|/feed/{id}|
