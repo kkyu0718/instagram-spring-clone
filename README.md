@@ -6,11 +6,11 @@
 ### **API 명세서**
 |기능|분류|메소드|path|
 |------|---|---|-----|
-|회원 가입|user|POST|/user|
-|로그인|user|POST|/user/login|
+|회원 가입|user|POST|/auth/signin|
+|로그인|user|POST|/auth/login|
 |게시글 업로드|feed|POST|/feed|
 |게시글 조회|feed|GET|/feed/{id}|
-|댓글 등록|comment|POST|/comment|
+|댓글 및 대댓글 등록|comment|POST|/comment|
 |댓글 조회|comment|GET|/comment/{id}|
 |좋아요 등록|like|POST|/like|
 |좋아요 취소|like|DELETE|/like|
