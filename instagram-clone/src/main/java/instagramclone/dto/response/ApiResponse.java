@@ -16,4 +16,9 @@ public class ApiResponse<T> {
         this.data = data;
     }
 
+    public ApiResponse(ResponseCode responseCode) {
+        this.statusCode = responseCode.getStatus().value();
+        this.message = responseCode.getMessage();
+        this.data = null;
+    }
 }
