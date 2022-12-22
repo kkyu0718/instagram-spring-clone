@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class CommentController {
     private final CommentService commentService;
 
-    @PostMapping("/")
+    @PostMapping()
     public ResponseEntity<CommentResponseDto> createComment(@RequestBody CreateCommentRequestDto request, @RequestHeader(value = "userId") Long userId) {
         if(request.parentCommentId() != null){
             CommentDto commentDto = commentService.createChildComment(request.content(), request.feedId(), request.parentCommentId(), userId);

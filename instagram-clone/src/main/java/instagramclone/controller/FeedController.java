@@ -21,7 +21,7 @@ import java.util.Optional;
 public class FeedController {
     private final FeedService feedService;
 
-    @PostMapping("/")
+    @PostMapping()
     public ResponseEntity<FeedResponseDto> createFeed(@RequestBody CreateFeedRequestDto request) {
         FeedDto feed = feedService.createFeed(request.content(), request.images());
         if(feed == null) {
