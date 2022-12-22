@@ -18,7 +18,11 @@ public enum ErrorCode {
 
     // feed
     FEED_NOT_CREATED(HttpStatus.BAD_REQUEST, "피드 저장에 실패하였습니다."),
-    FEED_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 피드입니다.");
+    FEED_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 피드입니다."),
+
+    // comment
+    COMMENT_NOT_CREATED(HttpStatus.BAD_REQUEST, "답글 저장에 실패하였습니다."),
+    COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 답글 입니다.");
 
     private final HttpStatus status;
     private final String message;

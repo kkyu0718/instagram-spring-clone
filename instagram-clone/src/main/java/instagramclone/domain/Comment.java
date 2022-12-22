@@ -46,8 +46,11 @@ public class Comment extends AuditingField {
         this.parentCommentId = parentCommentId;
         this.content = content;
     }
-
     public static Comment of(Feed feed, UserAccount userAccount, Long parentCommentId, String content) {
+        return new Comment(feed, userAccount, parentCommentId, content);
+    }
+
+    public static Comment of(Feed feed, UserAccount userAccount, String content) {
         return new Comment(feed, userAccount, null, content);
     }
 
