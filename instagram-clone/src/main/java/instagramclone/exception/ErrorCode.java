@@ -22,7 +22,11 @@ public enum ErrorCode {
 
     // comment
     COMMENT_NOT_CREATED(HttpStatus.BAD_REQUEST, "답글 저장에 실패하였습니다."),
-    COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 답글 입니다.");
+    COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 답글 입니다."),
+
+    // like
+    LIKE_NOT_CREATED(HttpStatus.BAD_REQUEST, "좋아요 저장에 실패하였습니다."),
+    LIKE_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 좋아요 입니다." );
 
     private final HttpStatus status;
     private final String message;

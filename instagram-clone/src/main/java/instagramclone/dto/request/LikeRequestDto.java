@@ -1,12 +1,8 @@
 package instagramclone.dto.request;
 
-import instagramclone.dto.UserAccountDto;
-
-import java.io.Serializable;
-
-public record LikeRequestDto(Long id, Long feedId, UserAccountDto userAccountDto)
+public record LikeRequestDto(Long feedId)
 {
-    public static LikeRequestDto of(Long id, Long feedId, UserAccountDto userAccountDto){
-        return new LikeRequestDto(id, feedId, userAccountDto);
+    public static LikeRequestDto of(Long feedId){
+        return new LikeRequestDto(feedId);
     }
 }
