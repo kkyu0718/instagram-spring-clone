@@ -32,7 +32,6 @@ public class FeedController {
 
     @GetMapping("/{id}")
     public ResponseEntity<FeedResponseDto> getFeed(@PathVariable Long id) {
-        log.info("request id {}", id);
         FeedDto feed = feedService.getFeed(id).orElseThrow(() -> new CustomException(ErrorCode.FEED_NOT_FOUND));
         return ResponseEntity.status(HttpStatus.FOUND).body(FeedResponseDto.from(feed));
     }
