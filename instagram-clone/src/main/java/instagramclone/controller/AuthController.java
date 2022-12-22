@@ -1,8 +1,11 @@
 package instagramclone.controller;
 
+import instagramclone.domain.UserAccount;
 import instagramclone.dto.UserAccountDto;
 import instagramclone.dto.request.LoginRequestDto;
 import instagramclone.dto.request.SignInRequestDto;
+import instagramclone.dto.response.ApiResponse;
+import instagramclone.dto.response.ResponseCode;
 import instagramclone.dto.response.UserAccountResponseDto;
 import instagramclone.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -23,14 +26,15 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/signup")
-    public ResponseEntity<UserAccountResponseDto> signIn (@RequestBody SignInRequestDto request) {
-        UserAccountDto user = authService.saveUser(request.name(), request.email(), request.password());
-        return ResponseEntity.status(HttpStatus.CREATED).body(UserAccountResponseDto.from(user));
+    public ResponseEntity<ApiResponse<UserAccountResponseDto>> signIn (@RequestBody SignInRequestDto request) {
+        UserAccountDto userDto = authService.saveUser(request.name(), request.email(), request.password());
+        UserAccountResponseDto user = UserAccountResponseDto.from(userDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse(ResponseCode.USER_CREATED, user));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserAccountResponseDto> login (@RequestBody LoginRequestDto request) {
+    public ResponseEntity<ApiResponse<UserAccountResponseDto>> login (@RequestBody LoginRequestDto request) {
         UserAccountDto user = authService.loginUser(request.email(), request.password());
-        return ResponseEntity.status(HttpStatus.OK).body(UserAccountResponseDto.from(user));
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(ResponseCode.USER_LOGIN_SUCCESS, UserAccountResponseDto.from(user)));
     }
 }
