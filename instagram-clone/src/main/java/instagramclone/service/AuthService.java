@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Slf4j
 @RequiredArgsConstructor
 @Transactional
@@ -26,7 +28,7 @@ public class AuthService {
     }
 
     public UserAccountDto loginUser(String email, String password) {
-        UserAccount user = userRepository.findByEmail(email);
+        UserAccount user = userRepository.findByEmail(email).orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
         if(user == null) {
             throw new CustomException(ErrorCode.USER_NOT_FOUND);
         }
@@ -34,7 +36,7 @@ public class AuthService {
     }
 
     private void validateDuplicateEmail(String email) {
-        UserAccount user = userRepository.findByEmail(email);
+        UserAccount user = userRepository.findByEmail(email).orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
         if(user != null) {
             throw new CustomException(ErrorCode.DUPLICATED_EMAIL);
         }

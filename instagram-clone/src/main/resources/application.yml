@@ -9,8 +9,17 @@ spring:
       hibernate:
         format_sql: true
     open-in-view: false
-#    show-sql: true
-
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+  sql:
+    init:
+      mode: always
+jwt:
+  header: Authorization
+  secret: ${JWT_SECRET_KEY}
+  access-token-validity-in-seconds: 600
 ---
 
 spring:
