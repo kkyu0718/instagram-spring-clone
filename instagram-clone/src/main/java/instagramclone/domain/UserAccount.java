@@ -1,13 +1,16 @@
 package instagramclone.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Getter
 @ToString
@@ -17,7 +20,9 @@ import java.util.Set;
         @Index(columnList = "createdBy")
 })
 @Entity
-public class UserAccount extends AuditingField {
+public class UserAccount extends AuditingField implements UserDetails
+{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,6 +37,11 @@ public class UserAccount extends AuditingField {
     @ToString.Exclude
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Comment> comments = new HashSet<>();
+
+    @ElementCollection(fetch = FetchType.EAGER) //roles 컬렉션
+    @Builder.Default
+    private List<String> roles = new ArrayList<>();
+
 
     protected UserAccount() {
     }
@@ -77,5 +87,37 @@ public class UserAccount extends AuditingField {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles.stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
