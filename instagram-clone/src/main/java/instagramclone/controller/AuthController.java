@@ -4,6 +4,7 @@ import instagramclone.domain.UserAccount;
 import instagramclone.dto.UserAccountDto;
 import instagramclone.dto.request.LoginRequestDto;
 import instagramclone.dto.request.SignInRequestDto;
+import instagramclone.dto.response.AccessTokenDto;
 import instagramclone.dto.response.ApiResponse;
 import instagramclone.dto.response.ResponseCode;
 import instagramclone.dto.response.UserAccountResponseDto;
@@ -34,7 +35,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<UserAccountResponseDto>> login (@RequestBody LoginRequestDto request) {
-        UserAccountDto user = authService.loginUser(request.email(), request.password());
-        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(ResponseCode.USER_LOGIN_SUCCESS, UserAccountResponseDto.from(user)));
+        AccessTokenDto user = authService.loginUser(request.email(), request.password());
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(ResponseCode.USER_LOGIN_SUCCESS, user));
     }
 }
