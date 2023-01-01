@@ -1,6 +1,5 @@
 package instagramclone.service;
 
-import instagramclone.config.jwt.JwtUtils;
 import instagramclone.domain.UserAccount;
 import instagramclone.dto.UserAccountDto;
 import instagramclone.dto.response.AccessTokenDto;
@@ -11,17 +10,10 @@ import instagramclone.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -51,11 +43,12 @@ public class AuthService {
         UserAccount user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-        boolean match = passwordEncoder.matches(password, user.getPassword());
-        if(!match) {
-            throw new CustomException(ErrorCode.LOGIN_FAILURE);
-        }
-        String token = JwtUtils.createToken(user);
+//        boolean match = passwordEncoder.matches(password, user.getPassword());
+//        if(!match) {
+//            throw new CustomException(ErrorCode.LOGIN_FAILURE);
+//        }
+//        String token = JwtUtils.createToken(user);
+        String token = "예시";
         return AccessTokenDto.of(token);
     }
 
