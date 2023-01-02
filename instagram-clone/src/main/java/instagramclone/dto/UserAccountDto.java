@@ -41,10 +41,11 @@ public record UserAccountDto(
     }
 
     public UserAccount toEntity() {
-        return UserAccount.of(
-                email,
-                password,
-                name
-        );
+        return UserAccount.builder()
+                .email(email)
+                .password(password)
+                .name(name)
+                .build();
+
     }
 }

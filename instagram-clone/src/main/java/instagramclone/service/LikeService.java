@@ -24,8 +24,8 @@ public class LikeService {
 
     @Transactional
     public LikeDto createLike(Long feedId, Long userId) {
-        UserAccount user = userRepository.getReferenceById(userId);
-        Feed feed = feedRepository.getReferenceById(feedId);
+        UserAccount user = userRepository.getById(userId);
+        Feed feed = feedRepository.getById(feedId);
 
         Like like = Like.of(feed, user);
         Like savedLike = likeRepository.save(like);

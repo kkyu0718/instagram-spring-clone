@@ -25,8 +25,8 @@ public class CommentService {
 
     @Transactional
     public CommentDto createComment(String content, Long feedId, Long userId) {
-        Feed feed = feedRepository.getReferenceById(feedId);
-        UserAccount user = userRepository.getReferenceById(userId);
+        Feed feed = feedRepository.getById(feedId);
+        UserAccount user = userRepository.getById(userId);
 
         Comment comment = Comment.of(feed, user, null, content);
         Comment savedComment = commentRepository.save(comment);
@@ -35,8 +35,8 @@ public class CommentService {
 
     @Transactional
     public CommentDto createChildComment(String content, Long feedId, Long parentCommentId, Long userId) {
-        Feed feed = feedRepository.getReferenceById(feedId);
-        UserAccount user = userRepository.getReferenceById(userId);
+        Feed feed = feedRepository.getById(feedId);
+        UserAccount user = userRepository.getById(userId);
         Comment comment = Comment.of(feed, user, parentCommentId, content);
         Comment savedComment = commentRepository.save(comment);
         return CommentDto.from(savedComment);

@@ -21,7 +21,8 @@ public enum ResponseCode {
 
     // like
     LIKE_CREATED(HttpStatus.CREATED, "좋아요 생성에 성공하였습니다."),
-    LIKE_DELETED(HttpStatus.OK, "좋아요 삭제에 성공하였습니다.");
+    LIKE_DELETED(HttpStatus.OK, "좋아요 삭제에 성공하였습니다."),
+    USER_LOGOUT_SUCCESS(HttpStatus.OK, "유저 로그아웃에 성공하였습니다.");
 
 
     private final HttpStatus status;
