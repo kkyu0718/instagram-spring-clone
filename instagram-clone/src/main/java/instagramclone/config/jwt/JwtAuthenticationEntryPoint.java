@@ -2,7 +2,9 @@ package instagramclone.config.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import instagramclone.exception.ErrorCode;
+import instagramclone.exception.ErrorResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
@@ -19,6 +21,7 @@ import java.nio.charset.StandardCharsets;
  * JWT Access Token 이 없는 상태로 요청을 보내거나, 토큰 만료, 유효하지 않은 토큰 등을 이용했을 경우 호출
  */
 @RequiredArgsConstructor
+@Slf4j
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     private final ObjectMapper objectMapper;
@@ -36,6 +39,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-        objectMapper.writeValue(response.getWriter(), ErrorCode.UNAUTHORIZED);
+        log.info("JWT Authentication Entry Point {}", response);
+        objectMapper.writeValue(response.getWriter(), new ErrorResponse( ErrorCode.UNAUTHORIZED));
     }
 }

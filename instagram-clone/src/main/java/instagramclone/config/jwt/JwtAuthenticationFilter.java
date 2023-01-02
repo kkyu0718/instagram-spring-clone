@@ -22,6 +22,7 @@ import java.io.IOException;
 
 /**
  * JWT를 이용한 로그인 인증
+ * https://cjw-awdsd.tistory.com/45
  */
 @Slf4j
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
@@ -50,7 +51,6 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     ) throws AuthenticationException {
         // 로그인할 때 입력한 email과 password를 가지고 authenticationToken를 생성한다.
         log.info("Authentication Filter");
-        log.info("request {}", request);
         ObjectMapper om = new ObjectMapper();
         LoginRequestDto loginRequestDto = null;
         try {
@@ -62,8 +62,10 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 loginRequestDto.email(),
                 loginRequestDto.password()
-        );
+        ); // setAuthentication 이 false인 객체를 생성. 즉 아직 인증되지 않은 객체를 생성하는 과정
+        // 추후에 인증된 생성자로 setauthentication 이 true인 객체로 생성 예정
         Authentication authentication = getAuthenticationManager().authenticate(authenticationToken);
+        log.info("authentication {}" , authentication.isAuthenticated());
         return authentication;
     }
 

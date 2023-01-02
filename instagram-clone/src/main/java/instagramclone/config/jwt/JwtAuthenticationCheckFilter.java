@@ -5,6 +5,7 @@ import instagramclone.exception.CustomException;
 import instagramclone.exception.ErrorCode;
 import instagramclone.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,6 +26,7 @@ import static org.springframework.security.core.context.SecurityContextHolder.*;
  * JWT를 이용한 인증
  */
 @RequiredArgsConstructor
+@Slf4j
 public class JwtAuthenticationCheckFilter extends OncePerRequestFilter {
     private final JwtTokenProvider jwtTokenProvider;
 
@@ -32,6 +34,7 @@ public class JwtAuthenticationCheckFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
         String token = resolveToken(request);
+        log.info("Jwt Authentication Check Filter token : {}", token);
         if (StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)) {
             Authentication authentication = jwtTokenProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
